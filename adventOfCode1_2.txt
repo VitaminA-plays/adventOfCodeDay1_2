@@ -1,0 +1,38 @@
+using System.Collections.Generic;
+
+string[] readings = System.IO.File.ReadAllLines(@"C:\Users\Axion\source\repos\adventofcode-day1-2\adventofcode-day1-2\measurements.txt");
+
+int totalCount = readings.Count();
+int[] measurements = new int[(totalCount)];
+
+for (int line = 0; line < (totalCount); line++)
+{
+    measurements[line] = int.Parse(readings[line]);
+}
+
+List<int> sumsList = new List<int>();
+
+for (int i=0; i<(totalCount); i++) {
+    int remainder = totalCount-i;
+    if (remainder >=3) {
+        int sum = 0;
+        for (int j=0; j<3; j++) {
+            sum += measurements[i+j];
+        }
+        sumsList.Add(sum);
+    }
+}
+
+int counter = 0;
+int last = sumsList[0];
+
+foreach (int s in sumsList)
+{
+    if (s > last) {
+        counter++;
+    }
+    last = s;
+}
+
+//Print solution to problem
+Console.WriteLine(counter.ToString());
